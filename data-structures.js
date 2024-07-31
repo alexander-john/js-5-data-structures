@@ -57,9 +57,32 @@ console.log(stack.pop());
 
 class HashTable {
     constructor(size = 42) {
-        this.bucket = new Array(size);
+        this.buckets = new Array(size);
         for (let i = 0; i < this.buckets.length; i++) {
             this.buckets[i] = [];
         }
     }
+
+    hash(key) {
+        return key.toString().length % this.buckets.length;
+    }
+
+    set(key, value) {
+        let idx = this.hash(key);
+        this.buckets[idx].push([key, value]);
+    }
+
+    get(key) {
+        let idx = this.hash(key);
+        for (let bucket of this.buckets[idx]) {
+            if (bucket[0] === key) {
+                return bucket[1];
+            }
+        }
+        return undefined;
+    }
 }
+
+let ht = new HashTable();
+ht.set('name', 'Alice');
+console.log(ht.get('name'));
