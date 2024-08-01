@@ -90,30 +90,44 @@ console.log(ht.get('name'));
 
 class Node {
     constructor(data, next = null) {
-        this.data = data;
-        this.next = next;
+      this.data = data;
+      this.next = next;
     }
-}
-
-class LinkedList {
+  }
+  
+  class LinkedList {
     constructor() {
-        this.head = null;
+      this.head = null;
     }
-
+  
     insertFirst(data) {
-        this.head = new Node(data, this.head);
+      this.head = new Node(data, this.head);
     }
-
+  
     insertLast(data) {
-        let newNode = new Node(data);
-        if (!this.head) {
-            this.head = newNode;
-            return;
-        }
-        let current = this.head;
-        while (current.next) {
-            current = current.next;
-        }
-        current.next = newNode;
+      let newNode = new Node(data);
+      if (!this.head) {
+        this.head = newNode;
+        return;
+      }
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
     }
-}
+  
+    printList() {
+      let current = this.head;
+      while (current) {
+        console.log(current.data);
+        current = current.next;
+      }
+    }
+  }
+
+let list = new LinkedList();
+list.insertFirst(1);
+list.insertLast(2);
+list.insertLast(3);
+list.printList();
